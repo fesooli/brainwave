@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="conteudo">
+
+<!-- begin #content -->
+	<div layout:fragment="content" id="content" class="content">	
+	
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$(".teclado").on("click", function(){
+					$("#text").val($("#text").val() + $(this).val());
+				});
+				
+				var buttons = [37];
+				var i = 0;
+				
+				$(".teclado").each(function(){
+					buttons.push($(this));
+					$(this).attr("disabled", "true");
+				});
+				
+				var click = true;
+				var k = 0;
+				setInterval(function() {
+					if(k == 1){
+						$(".line1").removeAttr("disabled");
+						$(".line2").attr("disabled", "true");
+						$(".line3").attr("disabled", "true");
+						$(".line4").attr("disabled", "true");
+					}
+					else if(k == 2){
+						$(".line1").attr("disabled", "true");
+						$(".line2").removeAttr("disabled");
+						$(".line3").attr("disabled", "true");
+						$(".line4").attr("disabled", "true");
+					}
+					if(k == 3){
+						$(".line1").attr("disabled", "true");
+						$(".line2").attr("disabled", "true");
+						$(".line3").removeAttr("disabled");
+						$(".line4").attr("disabled", "true");
+					}
+					if(k == 4){
+						$(".line1").attr("disabled", "true");
+						$(".line2").attr("disabled", "true");
+						$(".line3").attr("disabled", "true");
+						$(".line4").removeAttr("disabled");
+					}
+					
+					if(k >= 4) {
+				    	k = 0;
+				    }
+					
+					k++;
+				}, 3000);
+				
+				
+				$("body").mousedown(function(){
+					if(!$(".line1").is(":disabled")){
+						console.log("clicou na line 1");
+					}					
+					else if(!$(".line2").is(":disabled")){
+						console.log("clicou na line 2");
+					}					
+					else if(!$(".line3").is(":disabled")){
+						console.log("clicou na line 3");
+					}					
+					else if(!$(".line4").is(":disabled")){
+						console.log("clicou na line 4");
+					}
+				});
+				
+					
+			});		
+		</script>
+		
+		<form action="/textToSpeech" method="post">	
+			<div class="col-md-12 form-group" align="center">	
+				<textarea rows="6" class="col-md-12 form-control" id="text" name="text" th:value="${text}"></textarea>
+			</div>
+			
+			<div class="col-md-12 form-group" align="center">
+				<div class="col-md-12 form-group" align="center">
+					<button type="button" id="1" value="1" class="col-md-1 teclado btn btn-success line1">1</button>
+					<button type="button" id="2" value="2" class="col-md-1 teclado btn btn-success line1">2</button>
+					<button type="button" id="3" value="3" class="col-md-1 teclado btn btn-success line1">3</button>
+					<button type="button" id="4" value="4" class="col-md-1 teclado btn btn-success line1">4</button>
+					<button type="button" id="5" value="5" class="col-md-1 teclado btn btn-success line1">5</button>
+					<button type="button" id="6" value="6" class="col-md-1 teclado btn btn-success line1">6</button>
+					<button type="button" id="7" value="7" class="col-md-1 teclado btn btn-success line1">7</button>
+					<button type="button" id="8" value="8" class="col-md-1 teclado btn btn-success line1">8</button>
+					<button type="button" id="9" value="9" class="col-md-1 teclado btn btn-success line1">9</button>
+					<button type="button" id="0" value="0" class="col-md-1 teclado btn btn-success line1">0</button>
+				</div>
+				
+				<div class="col-md-12 form-group" align="center">
+					<button type="button" id="Q" value="Q" class="col-md-1 teclado btn btn-success line2">Q</button>
+					<button type="button" id="W" value="W" class="col-md-1 teclado btn btn-success line2">W</button>
+					<button type="button" id="E" value="E" class="col-md-1 teclado btn btn-success line2">E</button>
+					<button type="button" id="R" value="R" class="col-md-1 teclado btn btn-success line2">R</button>
+					<button type="button" id="T" value="T" class="col-md-1 teclado btn btn-success line2">T</button>
+					<button type="button" id="Y" value="Y" class="col-md-1 teclado btn btn-success line2">Y</button>
+					<button type="button" id="U" value="U" class="col-md-1 teclado btn btn-success line2">U</button>
+					<button type="button" id="I" value="I" class="col-md-1 teclado btn btn-success line2">I</button>
+					<button type="button" id="O" value="O" class="col-md-1 teclado btn btn-success line2">O</button>
+					<button type="button" id="P" value="P" class="col-md-1 teclado btn btn-success line2">P</button>
+				</div>
+				
+				<div class="col-md-12 form-group" align="center">
+					<button type="button" id="A" value="A" class="col-md-1 teclado btn btn-success line3">A</button>
+					<button type="button" id="S" value="S" class="col-md-1 teclado btn btn-success line3">S</button>
+					<button type="button" id="D" value="D" class="col-md-1 teclado btn btn-success line3">D</button>
+					<button type="button" id="F" value="F" class="col-md-1 teclado btn btn-success line3">F</button>
+					<button type="button" id="G" value="G" class="col-md-1 teclado btn btn-success line3">G</button>
+					<button type="button" id="H" value="H" class="col-md-1 teclado btn btn-success line3">H</button>
+					<button type="button" id="J" value="J" class="col-md-1 teclado btn btn-success line3">J</button>
+					<button type="button" id="K" value="K" class="col-md-1 teclado btn btn-success line3">K</button>
+					<button type="button" id="L" value="L" class="col-md-1 teclado btn btn-success line3">L</button>
+				</div>
+				
+				<div class="col-md-12 form-group" align="center">
+					<button type="button" id="Z" value="Z" class="col-md-1 teclado btn btn-success line4">Z</button>
+					<button type="button" id="X" value="X" class="col-md-1 teclado btn btn-success line4">X</button>
+					<button type="button" id="C" value="C" class="col-md-1 teclado btn btn-success line4">C</button>
+					<button type="button" id="V" value="V" class="col-md-1 teclado btn btn-success line4">V</button>
+					<button type="button" id="B" value="B" class="col-md-1 teclado btn btn-success line4">B</button>
+					<button type="button" id="N" value="N" class="col-md-1 teclado btn btn-success line4">N</button>
+					<button type="button" id="M" value="M" class="col-md-1 teclado btn btn-success line4">M</button>
+					<button type="button" id="space" value=" " class="col-md-3 teclado btn btn-success line4">ESPAÇO</button>
+				</div>
+				
+				<div class="col-md-12 form-group" align="center">			
+					<input type="submit" value="Enviar" class="btn"/>
+				</div>
+			</div>
+		</form>
+		
+	</div>
+<!-- end #content -->
+
+</html>
